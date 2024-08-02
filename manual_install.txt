@@ -64,3 +64,5 @@ pwd
 
 ./part0.system-hw-prepration.sh
 
+./Vicidial-Scratch-Install-AlmaLinux-8.8-x86_64-Minimal-Server/blob/main/part1.update-install-kernel-sources-epl-release-compiler-tools.sh
+
