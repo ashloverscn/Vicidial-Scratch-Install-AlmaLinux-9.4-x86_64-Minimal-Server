@@ -1,1 +1,20 @@
+## Setup timezone ##
+
+timedatectl status
+
+timedatectl list-timezones | grep Asia/C && timedatectl list-timezones | grep Asia/K
+
+timedatectl set-timezone Asia/Calcutta && timedatectl status
+
+## Setup hostname and reverse domain pointing ##
+
+dnf -y install NetworkManager
+
+hostnamectl status | grep Static
+
+hostnamectl set-hostname 1.vicibox-alma9.SASoftwares.com
+
+cat /etc/hostname
+
+hostname
 
