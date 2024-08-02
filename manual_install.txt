@@ -34,3 +34,7 @@ dnf -y check-update
 
 dnf -y install wget git unzip NetworkManager net-tools nano expect bash-completion bash-completion-*
 
+systemctl restart network
+
+service network restart
+
