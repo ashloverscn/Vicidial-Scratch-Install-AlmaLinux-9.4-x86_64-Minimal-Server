@@ -8,6 +8,8 @@ timedatectl set-timezone Asia/Calcutta && timedatectl status
 
 ## Setup hostname and reverse domain pointing ##
 
+## Setup hostname
+
 hostnamectl status | grep Static
 
 hostnamectl set-hostname 1.vicibox-alma9.SASoftwares.com
@@ -15,4 +17,10 @@ hostnamectl set-hostname 1.vicibox-alma9.SASoftwares.com
 cat /etc/hostname
 
 hostname
+
+## Setup reverse ip binding to the hostname
+
+echo "74.208.213.152   1.vicibox-alma9.SASoftwares.com" | cat >> /etc/hosts
+
+cat /etc/hosts
 
