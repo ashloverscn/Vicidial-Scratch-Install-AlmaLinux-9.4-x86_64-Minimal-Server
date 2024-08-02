@@ -8,8 +8,6 @@ timedatectl set-timezone Asia/Calcutta && timedatectl status
 
 ## Setup hostname and reverse domain pointing ##
 
-dnf -y install NetworkManager
-
 hostnamectl status | grep Static
 
 hostnamectl set-hostname 1.vicibox-alma9.SASoftwares.com
