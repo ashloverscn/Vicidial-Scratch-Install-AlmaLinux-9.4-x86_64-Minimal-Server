@@ -60,3 +60,7 @@ chmod +x *.sh
 
 pwd
 
+## from here vicidial installation begins
+
+./part0.system-hw-prepration.sh
+
