@@ -77,7 +77,7 @@ sleep 2
 cd /usr/src
 \cp -r /etc/my.cnf /etc/my.cnf.original
 echo "" > /etc/my.cnf
-#wget -O /usr/src/my.cnf https://raw.githubusercontent.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-8.8-x86_64-Minimal-Server/main/my.cnf
+#wget -O /usr/src/my.cnf https://raw.githubusercontent.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-9.X-x86_64-Minimal-Server/main/my.cnf
 \cp -r ./my.cnf /etc/my.cnf
 #\cp -r /usr/src/my.cnf /etc/my.cnf 
 
@@ -87,7 +87,7 @@ sleep 2
 cd /usr/src/
 \cp -r /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.original
 echo "" > /etc/httpd/conf/httpd.conf
-#wget -O /usr/src/httpd.conf https://github.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-8.8-x86_64-Minimal-Server/raw/main/httpd.conf
+#wget -O /usr/src/httpd.conf https://github.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-9.X-x86_64-Minimal-Server/raw/main/httpd.conf
 \cp -r ./httpd.conf /etc/httpd/conf/httpd.conf
 #\cp -r /usr/src/httpd.conf /etc/httpd/conf/httpd.conf
 
@@ -107,8 +107,8 @@ cd /usr/src
 \cp -r /etc/httpd/conf.d/0000-default-ssl.conf /etc/httpd/conf.d/0000-default-ssl.conf.original
 echo "" > /etc/httpd/conf.d/0000-default.conf
 echo "" > /etc/httpd/conf.d/0000-default-ssl.conf
-#wget -O /usr/src/httpd.conf https://github.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-8.8-x86_64-Minimal-Server/raw/main/0000-default.conf
-#wget -O /usr/src/httpd.conf https://github.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-8.8-x86_64-Minimal-Server/raw/main/0000-default-ssl.conf
+#wget -O /usr/src/httpd.conf https://github.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-9.X-x86_64-Minimal-Server/raw/main/0000-default.conf
+#wget -O /usr/src/httpd.conf https://github.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-9.X-x86_64-Minimal-Server/raw/main/0000-default-ssl.conf
 \cp -r ./0000-default.conf /etc/httpd/conf.d/0000-default.conf
 \cp -r ./0000-default-ssl.conf /etc/httpd/conf.d/0000-default-ssl.conf
 #\cp -r /usr/src/0000-default.conf /etc/httpd/conf.d/0000-default.conf
@@ -127,7 +127,7 @@ sleep 2
 cd /usr/src
 \cp -r /etc/php.ini /etc/php.ini.original
 echo "" > /etc/php.ini
-#wget -O /usr/src/php.ini https://github.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-8.8-x86_64-Minimal-Server/raw/main/php.ini
+#wget -O /usr/src/php.ini https://github.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-9.X-x86_64-Minimal-Server/raw/main/php.ini
 \cp -r ./php.ini /etc/php.ini
 #\cp -r /usr/src/php.ini /etc/php.ini
 
