@@ -65,7 +65,7 @@ cd /etc/dahdi
 echo -e "\e[0;32m Enable dahdi.service in systemctl \e[0m"
 sleep 2
 
-mv /etc/systemd/system/dahdi.service /etc/systemd/system/dahdi.service.bak
+\cp -r /etc/systemd/system/dahdi.service /etc/systemd/system/dahdi.service.bak
 touch /etc/systemd/system/dahdi.service
 
 cat <<DAHDI>> /etc/systemd/system/dahdi.service
