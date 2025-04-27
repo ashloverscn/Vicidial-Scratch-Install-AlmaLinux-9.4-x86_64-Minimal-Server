@@ -78,6 +78,8 @@ Also=systemd-networkd-wait-online.service
 ASTERISK
 
 #restart asterisk Service
+systemctl daemon-reload
+systemctl disable asterisk.service
 systemctl enable asterisk.service
 systemctl restart asterisk.service
 
