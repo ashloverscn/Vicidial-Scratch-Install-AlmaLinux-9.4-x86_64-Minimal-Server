@@ -71,17 +71,20 @@ touch /etc/systemd/system/dahdi.service
 cat <<DAHDI>> /etc/systemd/system/dahdi.service
 
 [Unit]
-Description=DAHDI Telephony Driver
+Description=DAHDI Telephony Drivers
 After=network.target
+Before=asterisk.service
 
 [Service]
-Type=simple
+Type=oneshot
 ExecStartPre=/sbin/modprobe dahdi
 ExecStartPre=/sbin/modprobe dahdi_dummy
-ExecStart=/usr/sbin/dahdi_cfg -vv
-Restart=always
-RestartSec=5s
-RemainAfterExit=no
+ExecStart=/usr/sbin/dahdi_cfg -v
+ExecReload=/usr/sbin/dahdi_cfg -v
+ExecStop=/usr/sbin/dahdi_cfg -v
+Restart=on-failure
+RestartSec=2
+RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
@@ -89,6 +92,7 @@ WantedBy=multi-user.target
 DAHDI
 
 #restart dahdi Service
+systemctl disable dahdi.service
 systemctl enable dahdi.service
 systemctl restart dahdi.service
 
