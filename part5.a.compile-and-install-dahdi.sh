@@ -61,6 +61,34 @@ make install-config
 cd /etc/dahdi
 \cp -r system.conf system.conf.bak
 \cp -r system.conf.sample system.conf
-systemctl enable dahdi
-systemctl start dahdi
+
+echo -e "\e[0;32m Enable dahdi.service in systemctl \e[0m"
+sleep 2
+
+mv /etc/systemd/system/dahdi.service /etc/systemd/system/dahdi.service.bak
+touch /etc/systemd/system/dahdi.service
+
+cat <<DAHDI>> /etc/systemd/system/dahdi.service
+
+[Unit]
+Description=DAHDI Telephony Driver
+After=network.target
+
+[Service]
+Type=simple
+ExecStartPre=/sbin/modprobe dahdi
+ExecStartPre=/sbin/modprobe dahdi_dummy
+ExecStart=/usr/sbin/dahdi_cfg -vv
+Restart=always
+RestartSec=5s
+RemainAfterExit=no
+
+[Install]
+WantedBy=multi-user.target
+
+DAHDI
+
+#restart dahdi Service
+systemctl enable dahdi.service
+systemctl start dahdi.service
 
