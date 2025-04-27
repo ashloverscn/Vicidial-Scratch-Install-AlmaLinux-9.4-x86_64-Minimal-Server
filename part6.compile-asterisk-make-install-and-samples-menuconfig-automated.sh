@@ -51,12 +51,13 @@ make samples
 make config
 sed -i 's|noload = chan_sip.so|;noload = chan_sip.so|g' /etc/asterisk/modules.conf
 
-systemctl enable asterisk && systemctl start asterisk
-
 \cp -r /usr/src/asterisk-$ver/contrib/init.d/rc.redhat.asterisk /etc/init.d/asterisk
 
 echo -e "\e[0;32m Enable asterisk.service in systemctl \e[0m"
 sleep 2
+
+\cp -r /etc/systemd/system/asterisk.service /etc/systemd/system/asterisk.service.bak
+touch /etc/systemd/system/asterisk.service
 
 cat <<ASTERISK>> /etc/systemd/system/asterisk.service
 
@@ -79,8 +80,4 @@ ASTERISK
 
 #restart asterisk Service
 systemctl daemon-reload
-systemctl disable asterisk.service
-systemctl enable asterisk.service
-systemctl restart asterisk.service
-
-
+systemctl disable asterisk.service && systemctl enable asterisk.service && systemctl restart asterisk.service
