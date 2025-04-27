@@ -68,9 +68,9 @@ sleep 2
 
 uname -r
 rpm -qa kernel\*
-dnf remove --oldinstallonly --setopt installonly_limit=0 kernel
+dnf -y remove --oldinstallonly --setopt installonly_limit=0 kernel
 sed -i 's/^installonly_limit=.*/installonly_limit=0/' /etc/dnf/dnf.conf
-dnf autoremove
+dnf -y autoremove
 sed -i 's/rhgb//g' /etc/default/grub
 sed -i 's/quiet//g' /etc/default/grub
 sed -i 's/GRUB_TIMEOUT=.*/GRUB_TIMEOUT=1/g' /etc/default/grub
