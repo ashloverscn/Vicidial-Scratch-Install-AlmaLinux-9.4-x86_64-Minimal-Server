@@ -142,4 +142,3 @@ systemctl restart mariadb.service
 cd /usr/src/astguiclient/trunk
 perl install.pl --copy_sample_conf_files --no-prompt
 
-

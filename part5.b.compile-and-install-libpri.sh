@@ -11,4 +11,3 @@ tar -xvzf libpri-$ver.tar.gz
 cd libpri-$ver
 make
 make install
-

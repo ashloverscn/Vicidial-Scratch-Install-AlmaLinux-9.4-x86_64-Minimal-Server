@@ -12,4 +12,3 @@ cd asterisk-perl-0.08
 perl Makefile.PL
 make all
 make install
-

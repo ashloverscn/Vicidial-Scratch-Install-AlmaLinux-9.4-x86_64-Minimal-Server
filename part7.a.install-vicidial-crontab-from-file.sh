@@ -9,3 +9,4 @@ cd /usr/src
 crontab -l > vici-cron.original
 #write crontab from a backup of the vicidial needed cronjobs
 crontab < vici-cron
+

@@ -9,4 +9,3 @@ cd lame-$ver
 ./configure
 make
 make install
-

@@ -15,4 +15,3 @@ tee -a ~/.bashrc <<EOF
 /usr/sbin/dahdi_cfg -v
 /usr/sbin/asterisk -V
 EOF
-

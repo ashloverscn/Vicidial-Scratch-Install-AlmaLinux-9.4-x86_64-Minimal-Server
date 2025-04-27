@@ -29,4 +29,3 @@ sleep 2
 systemctl restart fail2ban
 systemctl status fail2ban | head -n 18
 
-

@@ -158,4 +158,3 @@ systemctl start httpd.service
 systemctl start mariadb.service
 systemctl status mariadb.service | head -n 18
 systemctl status httpd.service | head -n 18
-

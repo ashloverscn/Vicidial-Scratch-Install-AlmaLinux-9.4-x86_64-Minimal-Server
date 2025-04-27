@@ -10,4 +10,3 @@ cd libsrtp-$ver
 make shared_library 
 make install
 ldconfig
-
