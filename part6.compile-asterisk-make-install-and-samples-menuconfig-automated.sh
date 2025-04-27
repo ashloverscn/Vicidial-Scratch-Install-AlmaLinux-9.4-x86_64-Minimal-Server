@@ -45,7 +45,8 @@ menuselect/menuselect --enable app_meetme menuselect.makeopts
 menuselect/menuselect --enable res_http_websocket menuselect.makeopts
 #enable res_srtp
 menuselect/menuselect --enable res_srtp menuselect.makeopts
-make -j ${JOBS} all
+#make -j ${JOBS} all
+make -j $(nproc) all
 make install
 make samples
 make config
