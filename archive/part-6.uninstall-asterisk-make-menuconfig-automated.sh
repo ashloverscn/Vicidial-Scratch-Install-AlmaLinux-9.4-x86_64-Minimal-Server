@@ -37,3 +37,4 @@ rm -rf /var/spool/asterisk
 rm -rf /usr/lib/asterisk
 rm -rf /usr/lib64/asterisk
 reboot
+
