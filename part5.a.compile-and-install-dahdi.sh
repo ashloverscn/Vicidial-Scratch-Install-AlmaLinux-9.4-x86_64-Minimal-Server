@@ -66,6 +66,7 @@ echo -e "\e[0;32m Enable dahdi.service in systemctl \e[0m"
 sleep 2
 
 \cp -r /etc/systemd/system/dahdi.service /etc/systemd/system/dahdi.service.bak
+rm -rf /etc/systemd/system/dahdi.service
 touch /etc/systemd/system/dahdi.service
 
 cat <<DAHDI>> /etc/systemd/system/dahdi.service
@@ -92,5 +93,9 @@ WantedBy=multi-user.target
 DAHDI
 
 #restart dahdi Service
-systemctl daemon-reload && systemctl disable dahdi.service && systemctl enable dahdi.service && systemctl restart dahdi.service && systemctl status dahdi.service | head -n 18
+systemctl daemon-reload && \
+systemctl disable dahdi.service && \
+systemctl enable dahdi.service && \
+systemctl restart dahdi.service && \
+systemctl status dahdi.service | head -n 18
 
