@@ -90,5 +90,5 @@ DAHDI
 
 #restart dahdi Service
 systemctl enable dahdi.service
-systemctl start dahdi.service
+systemctl restart dahdi.service
 
