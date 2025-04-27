@@ -42,7 +42,9 @@ unzip dahdi-9.5-fix.zip
 yum in newt* -y
 #
 
-make all
+#: ${JOBS:=$(( $(nproc) + $(nproc) / 2 ))}
+: ${JOBS:=$(nproc)}
+make -j ${JOBS} all
 make install
 make config
 make install-config
