@@ -92,6 +92,7 @@ WantedBy=multi-user.target
 DAHDI
 
 #restart dahdi Service
+systemctl daemon-reload
 systemctl disable dahdi.service
 systemctl enable dahdi.service
 systemctl restart dahdi.service
