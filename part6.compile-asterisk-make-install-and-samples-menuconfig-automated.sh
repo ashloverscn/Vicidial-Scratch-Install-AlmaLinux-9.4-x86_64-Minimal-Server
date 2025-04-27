@@ -68,7 +68,7 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-#Type=simple
+Type=simple
 PIDFile=/run/asterisk/asterisk.pid
 ExecStart=/usr/sbin/asterisk -fn
 ExecReload=/bin/kill -HUP $MAINPID
