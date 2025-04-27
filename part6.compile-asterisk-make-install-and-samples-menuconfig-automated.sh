@@ -57,9 +57,10 @@ echo -e "\e[0;32m Enable asterisk.service in systemctl \e[0m"
 sleep 2
 
 \cp -r /etc/systemd/system/asterisk.service /etc/systemd/system/asterisk.service.bak
+rm -rf /etc/systemd/system/asterisk.service
 touch /etc/systemd/system/asterisk.service
 
-tee -a /etc/systemd/system/asterisk.service <<EOF
+cat <<ASTERISK>> /etc/systemd/system/asterisk.service
 
 [Unit]
 Description=Asterisk PBX
@@ -79,7 +80,7 @@ RestartSec=5
 WantedBy=basic.target
 Also=systemd-networkd-wait-online.service
 
-EOF
+ASTERISK
 
 #restart asterisk Service
 systemctl daemon-reload && systemctl disable asterisk.service && systemctl enable asterisk.service && systemctl restart asterisk.service && systemctl status asterisk.service | head -n 18
