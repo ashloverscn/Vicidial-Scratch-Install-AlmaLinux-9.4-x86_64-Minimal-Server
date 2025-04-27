@@ -71,12 +71,12 @@ After=network-online.target
 Type=simple
 PIDFile=/run/asterisk/asterisk.pid
 ExecStart=/usr/sbin/asterisk -fn
-ExecReload=/bin/kill -HUP
+ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
 RestartSec=5
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=basic.target
 Also=systemd-networkd-wait-online.service
 
 ASTERISK
