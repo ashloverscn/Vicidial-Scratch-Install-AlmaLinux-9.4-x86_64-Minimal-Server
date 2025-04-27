@@ -34,7 +34,8 @@ tar -xvzf asterisk-$ver-patch.tar.gz
 
 fi
 
-: ${JOBS:=$(( $(nproc) + $(nproc) / 2 ))}
+#: ${JOBS:=$(( $(nproc) + $(nproc) / 2 ))}
+: ${JOBS:=$(nproc)}
 ./configure --libdir=/usr/lib64 --with-gsm=internal --enable-opus --enable-srtp --with-ssl --enable-asteriskssl --with-pjproject-bundled --with-jansson-bundled
 
 #### asterisk menuselect preconfig
@@ -45,8 +46,7 @@ menuselect/menuselect --enable app_meetme menuselect.makeopts
 menuselect/menuselect --enable res_http_websocket menuselect.makeopts
 #enable res_srtp
 menuselect/menuselect --enable res_srtp menuselect.makeopts
-#make -j ${JOBS} all
-make -j $(nproc) all
+make -j ${JOBS} all
 make install
 make samples
 make config
