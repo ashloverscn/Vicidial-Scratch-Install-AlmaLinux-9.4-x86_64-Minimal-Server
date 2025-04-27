@@ -30,6 +30,7 @@ sed -i 's|<linux/pci-aspm.h>|<linux/pci.h>|g' /usr/src/dahdi-linux-complete-$ver
 
 #this is a temporary fix for dahdi-3.4.0 by nox
 ln -sf /usr/lib/modules/$(uname -r)/vmlinux.xz /boot/
+mkdir /etc/include
 cd /etc/include
 wget https://dialer.one/newt.h
 
