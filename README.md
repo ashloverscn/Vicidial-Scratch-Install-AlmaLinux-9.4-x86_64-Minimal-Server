@@ -16,6 +16,10 @@ HOW TO INSTALL :
 ## root permission needed
 sudo su
 
+## to enable package caching , this saves time and data later
+
+sudo sed -i '/^keepcache/d' /etc/dnf/dnf.conf && echo "keepcache=True" | sudo tee -a /etc/dnf/dnf.conf
+
 #set your own speific timezone under which you are
 
 tee -a  ~/.bashrc <<EOF
