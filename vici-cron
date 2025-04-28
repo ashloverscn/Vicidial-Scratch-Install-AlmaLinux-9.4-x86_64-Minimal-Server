@@ -103,4 +103,3 @@
 * * * * * sleep 30; /usr/bin/VB-firewall --white --dynamic --quiet
 * * * * * sleep 40; /usr/bin/VB-firewall --white --dynamic --quiet
 * * * * * sleep 50; /usr/bin/VB-firewall --white --dynamic --quiet
-
