@@ -9,8 +9,8 @@ sleep 2
 cd /usr/src
 yum install kernel-devel-$(uname -r) -y
 #rm -rf dahdi-linux-complete*
-#yum remove dahdi* -y
-#yum remove dahdi-tools* -y
+yum remove dahdi* -y
+yum remove dahdi-tools* -y
 #yum install dahdi* -y
 #yum install dahdi-tools* -y
 if [ $oem -eq 1 ]
