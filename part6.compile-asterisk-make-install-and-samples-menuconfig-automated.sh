@@ -65,41 +65,64 @@ cat <<ASTERISK>> /etc/systemd/system/asterisk.service
 
 #############################################################
 [Unit]
-Description=Asterisk PBX
-Wants=nss-lookup.target
-Wants=network-online.target
-After=network-online.target
+Description=Asterisk PBX and telephony daemon.
+After=nss-lookup.target
 
 [Service]
 Type=simple
-PIDFile=/run/asterisk/asterisk.pid
-ExecStart=/usr/sbin/asterisk -fn
-ExecReload=/bin/kill -HUP $MAINPID
-Restart=on-failure
-RestartSec=5
+Environment=HOME=/var/lib/asterisk
+WorkingDirectory=/var/lib/asterisk
+User=asterisk
+Group=asterisk
+ExecStart=/usr/sbin/asterisk -f -C /etc/asterisk/asterisk.conf
+ExecStop=/usr/sbin/asterisk -rx 'core stop now'
+ExecReload=/usr/sbin/asterisk -rx 'core reload'
+
+# To emulate some of the features of the safe_asterisk script, copy
+# this file to /etc/systemd/system/asterisk.service and uncomment one
+# or more of the following lines.  For more information on what these
+# parameters mean see:
+#
+# http://0pointer.de/public/systemd-man/systemd.service.html
+# http://0pointer.de/public/systemd-man/systemd.exec.html
+
+#Nice=0
+#UMask=0002
+#LimitCORE=infinity
+#LimitNOFILE=
+#Restart=always
+#RestartSec=4
+
+# If you uncomment the following you should add '-c' to the ExecStart line above
+
+#TTYPath=/dev/tty7
+#StandardInput=tty
+#StandardOutput=tty
+#StandardError=tty
+
+PrivateTmp=true
 
 [Install]
-WantedBy=basic.target
-Also=systemd-networkd-wait-online.service
+WantedBy=multi-user.target
 
 #############################################################
 # [Unit]
 # Description=Asterisk PBX
-# After=network-online.target dahdi.service
-# Requires=network-online.target dahdi.service
+# Wants=nss-lookup.target
+# Wants=network-online.target
+# After=network-online.target
 
 # [Service]
-# Type=forking
-# WorkingDirectory=/var/lib/asterisk
+# Type=simple
 # PIDFile=/run/asterisk/asterisk.pid
-# ExecStart=/usr/sbin/asterisk -f -C /etc/asterisk/asterisk.conf
-# ExecReload=/usr/sbin/asterisk -rx 'core reload'
-# ExecStop=/usr/sbin/asterisk -rx 'core stop now'
-# Restart=always
+# ExecStart=/usr/sbin/asterisk -fn
+# ExecReload=/bin/kill -HUP $MAINPID
+# Restart=on-failure
 # RestartSec=5
 
 # [Install]
-# WantedBy=multi-user.target
+# WantedBy=basic.target
+# Also=systemd-networkd-wait-online.service
 
 #############################################################
 ASTERISK
