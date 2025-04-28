@@ -19,6 +19,7 @@ rm -rf ./lame*
 rm -rf ./jansson*
 rm -rf ./eaccelerator*
 rm -rf ./libpri*
+rm -rf ./libsrtp*
 
 df -h
 sleep 5
