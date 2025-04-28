@@ -9,10 +9,10 @@ sleep 2
 cd /usr/src
 yum install kernel-devel-$(uname -r) -y
 #rm -rf dahdi-linux-complete*
-#yum remove dahdi* -y
-#yum remove dahdi-tools* -y
-yum install dahdi* -y
-yum install dahdi-tools* -y
+yum remove dahdi* -y
+yum remove dahdi-tools* -y
+#yum install dahdi* -y
+#yum install dahdi-tools* -y
 if [ $oem -eq 1 ]
 then
 	#wget http://download.vicidial.com/required-apps/dahdi-linux-complete-2.3.0.1+2.3.0.tar.gz
