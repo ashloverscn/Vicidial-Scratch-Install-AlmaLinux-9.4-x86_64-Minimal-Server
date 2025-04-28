@@ -66,40 +66,41 @@ cat <<ASTERISK>> /etc/systemd/system/asterisk.service
 #############################################################
 [Unit]
 Description=Asterisk PBX
-After=network-online.target dahdi.service
-Requires=network-online.target dahdi.service
+Wants=nss-lookup.target
+Wants=network-online.target
+After=network-online.target
 
 [Service]
-Type=forking
-WorkingDirectory=/var/lib/asterisk
+Type=simple
 PIDFile=/run/asterisk/asterisk.pid
-ExecStart=/usr/sbin/asterisk -f -C /etc/asterisk/asterisk.conf
-ExecReload=/usr/sbin/asterisk -rx 'core reload'
-ExecStop=/usr/sbin/asterisk -rx 'core stop now'
-Restart=always
+ExecStart=/usr/sbin/asterisk -fn
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
 RestartSec=5
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=basic.target
+Also=systemd-networkd-wait-online.service
 
 #############################################################
 # [Unit]
 # Description=Asterisk PBX
-# Wants=nss-lookup.target
-# Wants=network-online.target
-# After=network-online.target
+# After=network-online.target dahdi.service
+# Requires=network-online.target dahdi.service
 
 # [Service]
-# Type=simple
+# Type=forking
+# WorkingDirectory=/var/lib/asterisk
 # PIDFile=/run/asterisk/asterisk.pid
-# ExecStart=/usr/sbin/asterisk -fn
-# ExecReload=/bin/kill -HUP $MAINPID
-# Restart=on-failure
+# ExecStart=/usr/sbin/asterisk -f -C /etc/asterisk/asterisk.conf
+# ExecReload=/usr/sbin/asterisk -rx 'core reload'
+# ExecStop=/usr/sbin/asterisk -rx 'core stop now'
+# Restart=always
 # RestartSec=5
 
 # [Install]
-# WantedBy=basic.target
-# Also=systemd-networkd-wait-online.service
+# WantedBy=multi-user.target
+
 #############################################################
 ASTERISK
 
@@ -107,6 +108,6 @@ ASTERISK
 systemctl daemon-reload && \
 systemctl disable asterisk.service && \
 systemctl enable asterisk.service && \
-systemctl restart asterisk.service & && \
+systemctl restart asterisk.service && \
 systemctl status asterisk.service | head -n 18
 
