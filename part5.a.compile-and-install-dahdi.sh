@@ -11,8 +11,8 @@ yum install kernel-devel-$(uname -r) -y
 #rm -rf dahdi-linux-complete*
 #yum remove dahdi* -y
 #yum remove dahdi-tools* -y
-yum install dahdi* -y
-yum install dahdi-tools* -y
+#yum install dahdi* -y
+#yum install dahdi-tools* -y
 if [ $oem -eq 1 ]
 then
 	#wget http://download.vicidial.com/required-apps/dahdi-linux-complete-2.3.0.1+2.3.0.tar.gz
@@ -48,7 +48,7 @@ make -j ${JOBS} all
 make install
 make config
 make install-config
-yum -y install dahdi-tools-libs
+#yum -y install dahdi-tools-libs
 modprobe dahdi
 modprobe dahdi_dummy
 dahdi_genconf -v
