@@ -107,6 +107,6 @@ ASTERISK
 systemctl daemon-reload && \
 systemctl disable asterisk.service && \
 systemctl enable asterisk.service && \
-systemctl restart asterisk.service && \
+systemctl restart asterisk.service & && \
 systemctl status asterisk.service | head -n 18
 
