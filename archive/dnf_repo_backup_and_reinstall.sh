@@ -24,4 +24,3 @@ while read pkg; do
     sudo dnf download --resolve "$pkg" || echo "Skipping $pkg"
 done < non-minimal-packages.txt
 
-chmod +x ./*.sh
