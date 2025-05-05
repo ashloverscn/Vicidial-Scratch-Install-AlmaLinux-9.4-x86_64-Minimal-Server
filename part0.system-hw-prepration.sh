@@ -81,5 +81,8 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 sleep 2
 
 #/usr/src/./enable-PrintMotd.sh
+#wget -O ~/.motd https://github.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-9.X-x86_64-Minimal-Server/raw/refs/heads/main/motd
+\cp -r /usr/src/motd /usr/src/.motd
+sed -i '/echo '\''cat ~\/\.motd'\''/d' ~/.bashrc && echo 'echo '\''cat ~/.motd'\''' >> ~/.bashrc
 
 #reboot
