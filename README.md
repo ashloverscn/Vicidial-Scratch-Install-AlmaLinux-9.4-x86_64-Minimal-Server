@@ -79,7 +79,12 @@ cd /usr/src/
 
 ./install.sh
 
+# finally run a cleanup of the inStallation Source regular or deep
+cd /usr/src/archive
+
 /usr/src/archive/./cleanup.sh
+
+/usr/src/archive/./deep-cleanup.sh
 
 
 
