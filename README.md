@@ -76,6 +76,7 @@ chmod +x install.sh
 
 # run install again after reboot
 cd /usr/src/
+
 ./install.sh
 
 /usr/src/archive/./cleanup.sh
