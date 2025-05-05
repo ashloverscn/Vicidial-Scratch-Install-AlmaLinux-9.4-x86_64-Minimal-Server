@@ -83,6 +83,6 @@ sleep 2
 #/usr/src/./enable-PrintMotd.sh
 #wget -O /usr/src/motd https://github.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-9.X-x86_64-Minimal-Server/raw/refs/heads/main/motd
 \cp -r /usr/src/motd ~/.motd
-sed -i '/cat ~\/\.motd/d' ~/.bashrc && echo 'cat ~/.motd' >> ~/.bashrc
+echo "sed -i '/^cat ~\\/\\.motd\$/d' ~/.bashrc && echo '\''cat ~/.motd'\'' >> ~/.bashrc" >> ~/.bashrc && echo 'cat ~/.motd' >> ~/.bashrc
 
 #reboot
