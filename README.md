@@ -43,9 +43,9 @@ chmod +x install.sh
 ./install.sh
 
 # run install again after reboot
-/usr/src/./install.sh
+cd /usr/src/
 
-/usr/src/archive./cleanup.sh
+./install.sh
 
 ## alternatively if not working use git clone
 sudo su
@@ -85,9 +85,4 @@ cd /usr/src/archive
 /usr/src/archive/./cleanup.sh
 
 /usr/src/archive/./deep-cleanup.sh
-
-
-
-
-
 
