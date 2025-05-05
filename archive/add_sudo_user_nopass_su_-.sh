@@ -1,9 +1,20 @@
 #!/bin/bash
 
-# Prompt for username and password
+# Prompt for username
 read -p "Enter new username: " newuser
-read -s -p "Enter default password: " userpass
-echo
+
+# Prompt for password with confirmation
+while true; do
+    read -s -p "Enter default password: " userpass
+    echo
+    read -s -p "Confirm password: " userpass_confirm
+    echo
+    if [ "$userpass" == "$userpass_confirm" ]; then
+        break
+    else
+        echo "❌ Passwords do not match. Please try again."
+    fi
+done
 
 # Create the user with home directory and bash shell
 sudo useradd -m -s /bin/bash "$newuser"
