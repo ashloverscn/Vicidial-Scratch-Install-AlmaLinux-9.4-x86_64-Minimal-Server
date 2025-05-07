@@ -121,7 +121,7 @@ sleep 2
 #read serveripadd
 # Retrieve the IP address
 serveripadd=$(hostname -I | awk '{print $1}')
-echo "Redirect permanent addreSS https://"$serveripadd/
+echo "Redirect permanent addreSS https://"$serveripadd"/"
 
 sed -i "s/Redirect permanent \/ https:\/\/.*/Redirect permanent \/ https:\/\/$serveripadd\//g" /etc/httpd/conf.d/0000-default.conf
 
