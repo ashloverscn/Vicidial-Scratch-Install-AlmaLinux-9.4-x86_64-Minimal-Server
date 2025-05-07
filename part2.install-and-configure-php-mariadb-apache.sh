@@ -134,6 +134,11 @@ echo "" > /etc/php.ini
 #wget -O /usr/src/php.ini https://github.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-9.X-x86_64-Minimal-Server/raw/main/php.ini
 \cp -r ./php.ini /etc/php.ini
 #\cp -r /usr/src/php.ini /etc/php.ini
+# Get current time zone using timedatectl
+#timezone=$(timedatectl | grep "Time zone" | awk '{print $3}')
+timezone=$(timedatectl | awk -F': ' '/Time zone/ {print $2}' | awk '{print $1}')
+#replace the date.timezone line in php.ini if it exists
+sed -i "s|^date.timezone =.*|date.timezone = $timezone|" /etc/php.ini
 
 echo -e "\e[0;32m create index.html in webroot for redirecting to welcome.php \e[0m"
 sleep 2
