@@ -18,7 +18,6 @@ sleep 2
 #read serveripadd
 # Retrieve the IP address
 serveripadd=$(hostname -I | awk '{print $1}')
-echo "IP Address\t: $serveripadd"
 
 echo "fail2ban self ignore ip will be set to "$serveripadd
 sleep 5
