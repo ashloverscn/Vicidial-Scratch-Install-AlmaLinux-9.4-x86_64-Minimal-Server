@@ -117,7 +117,10 @@ mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.bak
 
 echo -e "\e[0;32m Please Enter Redirect permanent address for https \e[0m"
 sleep 2
-read serveripadd
+#read serveripadd
+# Retrieve the IP address
+serveripadd=$(hostname -I | awk '{print $1}')
+echo "IP Address\t: $serveripadd"
 
 sed -i "s/Redirect permanent \/ https:\/\/.*/Redirect permanent \/ https:\/\/$serveripadd\//g" /etc/httpd/conf.d/0000-default.conf
 
