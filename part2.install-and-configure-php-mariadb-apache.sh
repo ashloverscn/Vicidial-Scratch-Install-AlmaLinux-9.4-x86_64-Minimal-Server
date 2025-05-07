@@ -137,6 +137,8 @@ echo "" > /etc/php.ini
 # Get current time zone using timedatectl
 #timezone=$(timedatectl | grep "Time zone" | awk '{print $3}')
 timezone=$(timedatectl | awk -F': ' '/Time zone/ {print $2}' | awk '{print $1}')
+# Uncomment and update date.timezone if it's commented out
+sed -i "s|^;date.timezone =.*|date.timezone = $timezone|" /etc/php.ini
 #replace the date.timezone line in php.ini if it exists
 sed -i "s|^date.timezone =.*|date.timezone = $timezone|" /etc/php.ini
 
