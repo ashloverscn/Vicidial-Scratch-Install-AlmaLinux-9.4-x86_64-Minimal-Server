@@ -12,9 +12,13 @@ systemctl start fail2ban
 
 yum -y install expect
 
-echo -e "\e[0;32m Please Enter This Server IP ADDRESS to avoid self ban \e[0m"
+#echo -e "\e[0;32m Please Enter This Server IP ADDRESS to avoid self ban \e[0m"
+echo -e "\e[0;32m Setting fail2ban Self Server IP ADDRESS in jail.local to avoid self ban \e[0m"
 sleep 2
-read serveripadd
+#read serveripadd
+# Retrieve the IP address
+serveripadd=$(hostname -I | awk '{print $1}')
+echo "IP Address\t: $serveripadd"
 
 echo "fail2ban self ignore ip will be set to "$serveripadd
 sleep 5
