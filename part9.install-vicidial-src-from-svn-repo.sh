@@ -49,7 +49,7 @@ echo "" > /etc/astguiclient.conf
 #wget -O /usr/src/astguiclient.conf https://github.com/ashloverscn/Vicidial-Scratch-Install-AlmaLinux-9.X-x86_64-Minimal-Server/raw/main/astguiclient.conf
 \cp -r ./astguiclient.conf /etc/astguiclient.conf
 
-sed -i 's/VARserver_ip => .*/VARserver_ip => $serveripadd/' /etc/astguiclient.conf
+sed -i "s|^VARserver_ip =>.*|VARserver_ip => $serveripadd|" /etc/astguiclient.conf
 
 #Secure Manager 
 sed -i s/0.0.0.0/127.0.0.1/g /etc/asterisk/manager.conf
