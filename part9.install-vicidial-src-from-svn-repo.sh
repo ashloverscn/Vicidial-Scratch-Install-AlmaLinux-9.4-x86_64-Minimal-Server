@@ -63,8 +63,8 @@ mysql -u root -e "use asterisk; INSERT INTO vicidial_confbridges VALUES (9600000
 echo -e "\e[0;32m Install vicidial \e[0m"
 sleep 2
 cd /usr/src/astguiclient/trunk
-perl install.pl
-#perl install.pl --no-prompt --copy_sample_conf_files=Y
+#perl install.pl
+perl install.pl --no-prompt --copy_sample_conf_files=Y
 
 echo -e "\e[0;32m Populate area codes \e[0m"
 sleep 2
@@ -72,8 +72,8 @@ sleep 2
 
 echo -e "\e[0;32m Update server ip \e[0m"
 sleep 2
-/usr/share/astguiclient/ADMIN_update_server_ip.pl --old-server_ip=10.10.10.15
-#/usr/share/astguiclient/ADMIN_update_server_ip.pl --old-server_ip=10.10.10.15 --server_ip=$serveripadd --auto
+#/usr/share/astguiclient/ADMIN_update_server_ip.pl --old-server_ip=10.10.10.15
+/usr/share/astguiclient/ADMIN_update_server_ip.pl --old-server_ip=10.10.10.15 --server_ip=$serveripadd --auto
 
 echo -e "\e[0;32m Doing Some BUG FIX \e[0m"
 #This is some kind of bug fix to bring back version info in the report panel by carpenox idont know much 
@@ -142,5 +142,6 @@ systemctl restart mariadb.service
 
 ## create missing files
 cd /usr/src/astguiclient/trunk
-perl install.pl --copy_sample_conf_files --no-prompt
+#perl install.pl --copy_sample_conf_files --no-prompt
+perl install.pl --no-prompt
 
