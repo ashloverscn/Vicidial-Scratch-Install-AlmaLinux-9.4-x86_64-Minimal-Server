@@ -1,3 +1,7 @@
+#!/bin/sh
+
+cd /usr/src
+
 mysql -uroot -D asterisk -e "UPDATE vicidial_users SET view_reports = '1' WHERE user = '6666';"
 mysql -uroot -D asterisk -e "UPDATE vicidial_users SET alter_agent_interface_options = '1' WHERE user = '6666';"
 mysql -uroot -D asterisk -e "UPDATE vicidial_users SET modify_users = '1' WHERE user = '6666';"
