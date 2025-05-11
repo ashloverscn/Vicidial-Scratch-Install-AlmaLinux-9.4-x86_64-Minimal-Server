@@ -51,7 +51,23 @@ echo "" > /etc/astguiclient.conf
 
 sed -i "s|^VARserver_ip =>.*|VARserver_ip => $serveripadd|" /etc/astguiclient.conf
 
-#Secure Manager 
+## fix audio files not visible from audio store and moh file browser and enable audio Store by default
+###################################################################################################################
+# Retrieve the IP address
+#serveripadd=$(hostname -I | awk '{print $1}')
+#echo "serveripadd is "$serveripadd
+/usr/share/astguiclient/ADMIN_audio_store_sync.pl --upload --debugX
+mysql -u admin -D asterisk -sN -e "UPDATE system_settings SET sounds_web_server = '${serveripadd}', sounds_central_control_active = '1';"
+sounds_web_directory=$(mysql -u root -D asterisk -sN -e "SELECT sounds_web_directory FROM system_settings LIMIT 1")
+mkdir /var/www/html/$sounds_web_directory/
+chmod 777 /var/www/html/$sounds_web_directory/
+chown apache:apache /var/www/html/$sounds_web_directory/
+ln -s /var/lib/asterisk/sounds/* /var/www/html/$sounds_web_directory/
+## removing the link :
+#cd /var/www/html/$sounds_web_directory/
+#find . -type l -exec rm {} +
+
+# Setup Secure Manager 
 sed -i s/0.0.0.0/127.0.0.1/g /etc/asterisk/manager.conf
 
 sed -i '$ a\ noload => res_timing_timerfd.so\ noload => res_timing_kqueue.so\ noload => res_timing_pthread.so' /etc/asterisk/modules.conf
