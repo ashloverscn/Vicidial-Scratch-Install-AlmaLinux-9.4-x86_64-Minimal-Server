@@ -56,13 +56,13 @@ sed -i "s|^VARserver_ip =>.*|VARserver_ip => $serveripadd|" /etc/astguiclient.co
 # Retrieve the IP address
 #serveripadd=$(hostname -I | awk '{print $1}')
 #echo "serveripadd is "$serveripadd
-/usr/share/astguiclient/ADMIN_audio_store_sync.pl --upload --debugX
 mysql -u root -D asterisk -sN -e "UPDATE system_settings SET sounds_web_server = '${serveripadd}', sounds_web_directory = 'audio', sounds_central_control_active = '1';"
 sounds_web_directory=$(mysql -u root -D asterisk -sN -e "SELECT sounds_web_directory FROM system_settings LIMIT 1")
 mkdir /var/www/html/$sounds_web_directory/
 chmod 777 /var/www/html/$sounds_web_directory/
 chown apache:apache /var/www/html/$sounds_web_directory/
 ln -s /var/lib/asterisk/sounds/* /var/www/html/$sounds_web_directory/
+/usr/share/astguiclient/ADMIN_audio_store_sync.pl --upload --debugX
 ## removing the link :
 #cd /var/www/html/$sounds_web_directory/
 #find . -type l -exec rm {} +
@@ -94,7 +94,7 @@ sleep 2
 echo -e "\e[0;32m Doing Some BUG FIX \e[0m"
 #This is some kind of bug fix to bring back version info in the report panel by carpenox idont know much 
 perl install.pl --no-prompt
-/usr/share/astguiclient/ADMIN_audio_store_sync.pl --upload
+/usr/share/astguiclient/ADMIN_audio_store_sync.pl --upload --debugX
 ##Fix ip_relay
 cd /usr/src/astguiclient/trunk/extras/ip_relay/
 unzip ip_relay_1.1.112705.zip
