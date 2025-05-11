@@ -57,7 +57,7 @@ sed -i "s|^VARserver_ip =>.*|VARserver_ip => $serveripadd|" /etc/astguiclient.co
 #serveripadd=$(hostname -I | awk '{print $1}')
 #echo "serveripadd is "$serveripadd
 /usr/share/astguiclient/ADMIN_audio_store_sync.pl --upload --debugX
-mysql -u root -D asterisk -sN -e "UPDATE system_settings SET sounds_web_server = '${serveripadd}', sounds_central_control_active = '1';"
+mysql -u root -D asterisk -sN -e "UPDATE system_settings SET sounds_web_server = '${serveripadd}', sounds_web_directory = 'audio', sounds_central_control_active = '1';"
 sounds_web_directory=$(mysql -u root -D asterisk -sN -e "SELECT sounds_web_directory FROM system_settings LIMIT 1")
 mkdir /var/www/html/$sounds_web_directory/
 chmod 777 /var/www/html/$sounds_web_directory/
