@@ -60,6 +60,7 @@ mysql -u root -D asterisk -sN -e "UPDATE system_settings SET sounds_web_server =
 /usr/share/astguiclient/ADMIN_audio_store_sync.pl --upload --debugX
 sounds_web_directory=$(mysql -u root -D asterisk -sN -e "SELECT sounds_web_directory FROM system_settings LIMIT 1")
 mkdir /var/www/html/$sounds_web_directory/
+mv /var/www/html/Sound/* /var/www/html/$sounds_web_directory/
 chmod 777 /var/www/html/$sounds_web_directory/
 chown apache:apache /var/www/html/$sounds_web_directory/
 ln -s /var/lib/asterisk/sounds/* /var/www/html/$sounds_web_directory/
