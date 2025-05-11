@@ -3,11 +3,11 @@
 yum -y install expect
 #echo -e "\e[0;32m Please Enter This Server IP ADDRESS \e[0m"
 echo -e "\e[0;32m Setting This Server IP ADDRESS \e[0m"
+sleep 2
 #read serveripadd
 # Retrieve the IP address
 serveripadd=$(hostname -I | awk '{print $1}')
 echo "serveripadd is "$serveripadd
-sleep 2
 
 echo -e "\e[0;32m Clone vicidial from  SVN \e[0m"
 sleep 2
@@ -76,6 +76,7 @@ sleep 2
 /usr/share/astguiclient/ADMIN_update_server_ip.pl --old-server_ip=10.10.10.15 --server_ip=$serveripadd --auto
 
 echo -e "\e[0;32m Fix audio files not visible from audio store and moh file browser and enable audio Store by default \e[0m"
+sleep 2
 # Retrieve the IP address
 #serveripadd=$(hostname -I | awk '{print $1}')
 #echo "serveripadd is "$serveripadd
@@ -92,6 +93,7 @@ ln -s /var/lib/asterisk/sounds/* /var/www/html/$sounds_web_directory/
 #find . -type l -exec rm {} +
 
 echo -e "\e[0;32m Doing Some BUG FIX \e[0m"
+sleep 2
 #This is some kind of bug fix to bring back version info in the report panel by carpenox idont know much 
 perl install.pl --no-prompt
 /usr/share/astguiclient/ADMIN_audio_store_sync.pl --upload --debugX
