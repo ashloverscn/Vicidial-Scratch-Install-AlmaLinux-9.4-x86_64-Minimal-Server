@@ -12,7 +12,8 @@ sudo sed -i 's|exit 0|### exit 0|g' /etc/rc.d/rc.local
 
 chmod +x /etc/rc.d/rc.local
 systemctl enable rc-local
-systemctl start rc-local
+#systemctl start rc-local &
+systemctl restart rc-local &
 
 echo -e "\e[0;32m add rc-local as a Service for vicidial ServiceS Startup \e[0m"
 sleep 2
