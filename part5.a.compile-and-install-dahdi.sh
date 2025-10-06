@@ -101,3 +101,8 @@ systemctl enable dahdi.service && \
 systemctl restart dahdi.service && \
 systemctl status dahdi.service | head -n 18
 
+\cp -r /dahdi.sh /dahdi.sh.bak
+rm -rf /dahdi.sh
+\cp -r  /usr/src/dahdi.sh /dahdi.sh
+
+chmod +x /dahdi.sh 
