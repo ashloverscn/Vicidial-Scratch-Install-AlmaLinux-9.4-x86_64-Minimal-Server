@@ -90,6 +90,10 @@ systemctl enable asterisk.service && \
 systemctl restart asterisk.service && \
 systemctl status asterisk.service | head -n 18
 
+\cp -r /asterisk.sh /asterisk.sh.bak
+rm -rf /asterisk.sh
+touch /asterisk.sh
+
 cat <<ASTERISK>> /asterisk.sh
 
 #!/bin/bash
