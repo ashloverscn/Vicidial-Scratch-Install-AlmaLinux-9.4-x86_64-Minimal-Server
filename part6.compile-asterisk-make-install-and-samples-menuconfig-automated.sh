@@ -92,22 +92,6 @@ systemctl status asterisk.service | head -n 18
 
 \cp -r /asterisk.sh /asterisk.sh.bak
 rm -rf /asterisk.sh
-touch /asterisk.sh
-
-cat <<ASTERISK>> /asterisk.sh
-
-#!/bin/bash
-
-service=$@asterisk
-/bin/systemctl -q is-active "$service.service"
-status=$?
-if [ "$status" == 0 ]; then
-    echo "$status"
-    echo "OK"
-else
-    /bin/systemctl restart "$service.service"
-fi
-
-ASTERISK
+\cp -rm  /usr/src/asterisk.sh /asterisk.sh
 
 chmod +x /asterisk.sh 
