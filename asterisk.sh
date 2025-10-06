@@ -5,7 +5,10 @@ service=$@asterisk
 status=$?
 if [ "$status" == 0 ]; then
     echo "$status"
+    echo "Asterisk Already Running"
     echo "OK"
 else
     /bin/systemctl restart "$service.service"
+    echo "Asterisk Service Started"
+    echo "OK"
 fi
