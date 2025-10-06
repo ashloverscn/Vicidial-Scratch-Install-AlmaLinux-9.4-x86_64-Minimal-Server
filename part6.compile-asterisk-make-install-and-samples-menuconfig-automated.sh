@@ -92,6 +92,6 @@ systemctl status asterisk.service | head -n 18
 
 \cp -r /asterisk.sh /asterisk.sh.bak
 rm -rf /asterisk.sh
-\cp -rm  /usr/src/asterisk.sh /asterisk.sh
+\cp -r  /usr/src/asterisk.sh /asterisk.sh
 
 chmod +x /asterisk.sh 
