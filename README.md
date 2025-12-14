@@ -24,7 +24,7 @@ sed -i '/^keepcache/d' /etc/dnf/dnf.conf && echo "keepcache=True" | tee -a /etc/
 
 tee -a  ~/.bashrc <<EOF
 
-hostnamectl set-hostname lab.go2dial.com
+hostnamectl set-hostname SASoftwareS.in
 
 EOF
 
@@ -54,7 +54,7 @@ sudo su
 
 tee -a  ~/.bashrc <<EOF
 
-hostnamectl set-hostname SASoftwareS.ins
+hostnamectl set-hostname SASoftwareS.in
 
 EOF
 
