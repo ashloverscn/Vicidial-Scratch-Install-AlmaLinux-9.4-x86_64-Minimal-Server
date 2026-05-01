@@ -27,11 +27,10 @@ else
 wget -O asterisk-$ver.tar.gz https://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-$ver.tar.gz
 tar -xvzf asterisk-$ver.tar.gz
 cd asterisk-$ver
-wget https://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-$ver-patch.tar.gz
-tar -xvzf asterisk-$ver-patch.tar.gz
+#wget https://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-$ver-patch.tar.gz
+#tar -xvzf asterisk-$ver-patch.tar.gz
 #patch if needed
 #patch -p0 < asterisk-$ver-patch
-
 fi
 
 #: ${JOBS:=$(( $(nproc) + $(nproc) / 2 ))}
