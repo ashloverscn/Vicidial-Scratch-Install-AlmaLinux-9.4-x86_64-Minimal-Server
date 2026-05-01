@@ -104,22 +104,19 @@ touch /etc/systemd/system/dahdi.service
 tee /etc/systemd/system/dahdi.service <<'EOF'
 [Unit]
 Description=DAHDI Telephony Drivers
-# Ensure hardware is initialized before starting
-After=systemd-modules-load.service local-fs.target
+After=network.target
 Before=asterisk.service
 
 [Service]
 Type=oneshot
-RemainAfterExit=yes
-# Load kernel modules
-ExecStartPre=/usr/sbin/modprobe dahdi
-ExecStartPre=/usr/sbin/modprobe dahdi_dummy
-# Configure spans
+ExecStartPre=/sbin/modprobe dahdi
+ExecStartPre=/sbin/modprobe dahdi_dummy
 ExecStart=/usr/sbin/dahdi_cfg -v
-# Reloading re-runs configuration
 ExecReload=/usr/sbin/dahdi_cfg -v
-# Properly unconfigure spans on stop to prevent "device busy" errors
-ExecStop=/usr/sbin/dahdi_cfg -v -unconfigure
+ExecStop=/usr/sbin/dahdi_cfg -v
+Restart=on-failure
+RestartSec=2
+RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
