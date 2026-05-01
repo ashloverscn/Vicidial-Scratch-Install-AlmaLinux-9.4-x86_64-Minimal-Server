@@ -15,32 +15,62 @@ yum remove dahdi-tools* -y
 #yum install dahdi-tools* -y
 if [ $oem -eq 1 ]
 then
-	#wget http://download.vicidial.com/required-apps/dahdi-linux-complete-2.3.0.1+2.3.0.tar.gz
+	wget http://download.vicidial.com/required-apps/dahdi-linux-complete-2.3.0.1+2.3.0.tar.gz
 	tar -xvzf dahdi-linux-complete-2.3.0.1+2.3.0.tar.gz
 	cd dahdi-linux-complete-2.3.0.1+2.3.0
 else
-	#wget -O dahdi-linux-complete-$ver+$ver.tar.gz https://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-$ver+$ver.tar.gz
+	wget -O dahdi-linux-complete-$ver+$ver.tar.gz https://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-$ver+$ver.tar.gz
 	tar -xvzf dahdi-linux-complete-$ver+$ver.tar.gz
 	cd dahdi-linux-complete-$ver+$ver
+
+	#####################################################################################################################################################
+	echo "[+] Applying DAHDI EL9 kernel compatibility fixes..."
+	
+	# --------------------------------------------------
+	# 1. Fix DEFINE_SEMAPHORE (new kernel requires count)
+	# --------------------------------------------------
+	echo "[*] Fixing DEFINE_SEMAPHORE..."
+	find linux/drivers/dahdi -type f -name "*.c" -exec sed -i \
+	's/DEFINE_SEMAPHORE(\([a-zA-Z0-9_]*\));/DEFINE_SEMAPHORE(\1, 1);/g' {} +
+	
+	# --------------------------------------------------
+	# 2. Fix MAX macro conflicts
+	# --------------------------------------------------
+	echo "[*] Fixing MAX macro conflicts..."
+	find linux/drivers/dahdi -type f -name "*.c" -exec sed -i \
+	-e 's/#define MAX \([0-9]\+\)/#define RETRY_MAX \1/g' \
+	-e 's/\<MAX\>/RETRY_MAX/g' {} +
+	
+	# --------------------------------------------------
+	# 3. Fix uevent const correctness
+	# --------------------------------------------------
+	echo "[*] Fixing uevent signatures..."
+	find linux/drivers/dahdi -type f -name "*.c" -exec sed -i \
+	's/int[[:space:]]\+\([a-zA-Z0-9_]*_uevent\)(struct device \*/int \1(const struct device */g' {} +
+	
+	# --------------------------------------------------
+	# 4. Fix class_create API change
+	# --------------------------------------------------
+	echo "[*] Fixing class_create API..."
+	find linux -type f -name "*.c" -exec sed -i \
+	's/class_create(THIS_MODULE, *"\([^"]*\)")/class_create("\1")/g' {} +
+	
+	# --------------------------------------------------
+	# 5. Fix deprecated workqueue call (safe)
+	# --------------------------------------------------
+	echo "[*] Fixing workqueue API..."
+	find linux/drivers/dahdi -type f -name "*.c" -exec sed -i \
+	's/flush_scheduled_work()/flush_workqueue(system_wq)/g' {} +
+	
+	# --------------------------------------------------
+	# 6. Disable -Werror
+	# --------------------------------------------------
+	echo "[*] Disabling -Werror..."
+	sed -i 's/-Werror//g' linux/Makefile
+	
+	echo "[+] All fixes applied. You can now run make."
+	#####################################################################################################################################################
 fi
-
-#sed -i 's|(netdev, \&wc->napi, \&wctc4xxp_poll, 64);|(netdev, \&wc->napi, \&wctc4xxp_poll);|g' /usr/src/dahdi-linux-complete-$ver+$ver/linux/drivers/dahdi/wctc4xxp/base.c
-sudo sed -i 's|, 64);|);|g' /usr/src/dahdi-linux-complete-$ver+$ver/linux/drivers/dahdi/wctc4xxp/base.c
-sed -i 's|<linux/pci-aspm.h>|<linux/pci.h>|g' /usr/src/dahdi-linux-complete-$ver+$ver/linux/include/dahdi/kernel.h
-
-#this is a temporary fix for dahdi-3.4.0 by nox
-ln -sf /usr/lib/modules/$(uname -r)/vmlinux.xz /boot/
-mkdir /etc/include
-cd /etc/include
-wget https://dialer.one/newt.h
-
-cd /usr/src/
-mkdir dahdi-linux-complete-3.4.0+3.4.0
-cd dahdi-linux-complete-3.4.0+3.4.0
-wget https://cybur-dial.com/dahdi-9.5-fix.zip
-unzip dahdi-9.5-fix.zip
-yum in newt* -y
-#
 
 #: ${JOBS:=$(( $(nproc) + $(nproc) / 2 ))}
 : ${JOBS:=$(nproc)}
