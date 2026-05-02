@@ -19,11 +19,6 @@ yum remove asterisk-* -y
 #yum install asterisk-* --exclude=kernel-debug* -y
 if [ $oem -eq 1 ]
 then
-wget -O asterisk-$ver-vici.tar.gz http://download.vicidial.com/$subdr/asterisk-$ver-vici.tar.gz
-tar -xvzf asterisk-$ver-vici.tar.gz
-cd asterisk-$ver-vici
-
-else
 wget -O asterisk-$ver.tar.gz https://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-$ver.tar.gz
 tar -xvzf asterisk-$ver.tar.gz
 cd asterisk-$ver
@@ -31,6 +26,11 @@ cd asterisk-$ver
 #tar -xvzf asterisk-$ver-patch.tar.gz
 #patch if needed
 #patch -p0 < asterisk-$ver-patch
+
+else
+wget -O asterisk-$ver-vici.tar.gz http://download.vicidial.com/$subdr/asterisk-$ver-vici.tar.gz
+tar -xvzf asterisk-$ver-vici.tar.gz
+cd asterisk-$ver-vici
 fi
 
 #: ${JOBS:=$(( $(nproc) + $(nproc) / 2 ))}
@@ -93,4 +93,4 @@ systemctl status asterisk.service | head -n 18
 rm -rf /asterisk.sh
 \cp -r  /usr/src/asterisk.sh /asterisk.sh
 
-chmod +x /asterisk.sh 
+chmod +x /asterisk.sh
