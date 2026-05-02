@@ -163,4 +163,7 @@ systemctl restart mariadb.service
 cd /usr/src/astguiclient/trunk
 #perl install.pl --copy_sample_conf_files --no-prompt
 perl install.pl --no-prompt
-
+systemctl restart mariadb
+systemctl restart crond
+systemctl restart asterisk
+/usr/share/astguiclient/ADMIN_keepalive_ALL.pl --debug
