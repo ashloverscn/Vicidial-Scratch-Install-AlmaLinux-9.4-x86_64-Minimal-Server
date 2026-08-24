@@ -62,6 +62,7 @@ if (chkgetpost('submit')) {
 #
 -->
 <html>
+<head>
 <title>User Validation</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Pragma" content="no-cache">
@@ -70,6 +71,21 @@ if (chkgetpost('submit')) {
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Arial", sans-serif}
 </style>
+
+<?php
+// If we have a redirect URL, configure it dynamically before header outputs
+if ( $loginstate==2 && $PORTAL_redirecturl!='X' ) {
+    $clean_host = preg_replace('/:\d+/', '', $_SERVER['HTTP_HOST']);
+    $PORTAL_redirecturl = "https://" . $clean_host . "/vicidial/welcome.php";
+    $PORTAL_redirectlogin = 0;
+    
+    // Fallback default to 2 seconds if config value is 0 or missing
+    $redirect_secs = (intval($PORTAL_redirectsecs) > 0) ? intval($PORTAL_redirectsecs) : 2;
+?>
+<meta http-equiv="refresh" content="<?php echo $redirect_secs; ?>;url=<?php echo $PORTAL_redirecturl; ?>">
+<?php } ?>
+</head>
+<body>
 
 <?php
 // If the topbar is to be displayed output that code here
@@ -121,50 +137,31 @@ if ($loginstate==1) {
 
 // If we have a redirect URL, then put our countdown here
 if ( $loginstate==2 && $PORTAL_redirecturl!='X' ) {
-	debugoutput("   Portal Redirect to $PORTAL_redirecturl in $PORTAL_redirectsecs",2);
-	list($phonelogin, $phonepass, $adminfield)=getphonelogin($login); // get for redirect URL rewriting
-	
-	// If we are redirecting with user/phone login info, generate that URL here
-	if ($PORTAL_redirectlogin==1) {
-		// If the phone login is set to 'admin' then redirect to admin URL, otherwise redirect to agent interface
-		if (strtolower($adminfield)=='admin') {
-			$PORTAL_redirecturl = $PORTAL_redirectadmin . '?login=' . $login . '&login_pass=' . $pass;
-		} else {
-			$PORTAL_redirecturl = $PORTAL_redirecturl . '?phone_login=' . $phonelogin . '&phone_pass=' . $phonepass . '&VD_login=' . $login . '&VD_pass=' . $pass;
-		}
-	}
+	debugoutput("   Portal Redirect to $PORTAL_redirecturl in $redirect_secs",2);
 ?>
 
-<script type = "text/javascript">
-/*author Philip M. 2010*/
+<script type="text/javascript">
+(function() {
+    var timeInSecs = <?php echo $redirect_secs; ?>;
+    var redirectUrl = "<?php echo $PORTAL_redirecturl; ?>";
 
-var timeInSecs;
-var ticker;
-
-function startTimer(secs){
-timeInSecs = parseInt(secs)-1;
-ticker = setInterval("tick()",1000);   // every second
-}
-
-function tick() {
-var secs = timeInSecs;
-if (secs>0) {
-timeInSecs--;
-}
-else {
-clearInterval(ticker); // stop counting at zero
-window.location.replace("<?php echo $PORTAL_redirecturl; ?>"); // Redirect to the URL given
-}
-
-document.getElementById("countdown").innerHTML = secs;
-}
-
-startTimer(<?php echo $PORTAL_redirectsecs; ?>);  // Timer countdown seconds
-
+    var ticker = setInterval(function() {
+        if (timeInSecs > 1) {
+            timeInSecs--;
+            var el = document.getElementById("countdown");
+            if (el) { el.innerHTML = timeInSecs; }
+        } else {
+            clearInterval(ticker);
+            window.location.href = redirectUrl;
+        }
+    }, 1000);
+})();
 </script>
 
-<div class="w3-main " style="margin-left:40px;margin-top:70px;padding-left:20px;padding-bottom:22px;width:230px"><h4>Redirecting to <a href=" <?php echo $PORTAL_redirecturl; ?>">Login Page</a> in <span id="countdown" style="font-weight: bold;color:red;"> <?php echo $PORTAL_redirectsecs; ?> </span> seconds.<br>Please Bookmark the login page for easier access in the future.</h4>
+<div class="w3-main " style="margin-left:40px;margin-top:70px;padding-left:20px;padding-bottom:22px;width:230px"><h4>Redirecting to <a href="<?php echo $PORTAL_redirecturl; ?>">Welcome Page</a> in <span id="countdown" style="font-weight: bold;color:red;"><?php echo $redirect_secs; ?></span> seconds.<br>Please Bookmark the login page for easier access in the future.</h4>
 </div>
 <?php
 }
 ?>
+</body>
+</html>
