@@ -18,6 +18,6 @@ session_destroy();
 $host = $_SERVER['HTTP_HOST'];
 
 // Redirect explicitly to the dynportal directory
-header("Location: https://$host/dynportal/valid8.php");
+header("Location: https://$host:446/valid8.php");
 exit();
 ?>
