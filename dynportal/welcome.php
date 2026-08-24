@@ -137,7 +137,7 @@ echo "<TR><TD ALIGN=CENTER COLSPAN=2><font class=\"skb_text\"> <a href=\"../$adm
 echo "<TR><TD ALIGN=CENTER COLSPAN=2><font size=1> &nbsp; </TD></TR>\n";
 
 # --- LOGOUT / DEAUTHENTICATION BUTTON ---
-echo "<TR><TD ALIGN=CENTER COLSPAN=2><font class=\"skb_text\"> <a href=\"logout.php\" style=\"color: #cc0000; font-weight: bold;\">"._QXZ("Logout / Deauthenticate")."</a> </TD></TR>\n";
+echo "<TR><TD ALIGN=CENTER COLSPAN=2><font class=\"skb_text\"> <a href=\"logout.php\" style=\"color: #cc0000; font-weight: bold;\">"._QXZ("Logout")."</a> </TD></TR>\n";
 echo "<TR><TD ALIGN=CENTER COLSPAN=2><font size=1> &nbsp; </TD></TR>\n";
 
 echo "</table></center>\n";
