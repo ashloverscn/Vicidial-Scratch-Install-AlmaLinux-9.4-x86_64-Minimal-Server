@@ -62,6 +62,7 @@ firewall-cmd --ipset=dynamiclist --remove-entry=192.168.29.97
 
 firewall-cmd --permanent --ipset=dynamiclist --add-entry=192.168.29.97
 
-
 ipset list dynamiclist
+
+VB-firewall --dynamic
 
