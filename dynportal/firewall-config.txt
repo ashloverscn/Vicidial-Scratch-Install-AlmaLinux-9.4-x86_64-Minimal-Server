@@ -62,7 +62,7 @@ firewall-cmd --ipset=dynamiclist --remove-entry=192.168.29.97
 
 firewall-cmd --permanent --ipset=dynamiclist --add-entry=192.168.29.97
 
-firewall-cmd --direct --passthrough ipv4 -F dynamiclist
+firewall-cmd --permanent --ipset=dynamiclist --flush
 
 ipset create dynamiclist hash:ip
 
