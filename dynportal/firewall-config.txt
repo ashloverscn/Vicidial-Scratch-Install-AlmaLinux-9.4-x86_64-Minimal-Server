@@ -64,6 +64,10 @@ firewall-cmd --permanent --ipset=dynamiclist --add-entry=192.168.29.97
 
 ipset create dynamiclist hash:ip
 
+ipset add dynamiclist 192.168.29.97 
+
+ipset del dynamiclist 192.168.29.97
+
 ipset list dynamiclist
 
 VB-firewall --dynamic
