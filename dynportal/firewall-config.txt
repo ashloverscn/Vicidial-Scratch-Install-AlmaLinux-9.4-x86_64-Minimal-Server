@@ -62,7 +62,9 @@ firewall-cmd --ipset=dynamiclist --remove-entry=192.168.29.97
 
 firewall-cmd --permanent --ipset=dynamiclist --add-entry=192.168.29.97
 
-firewall-cmd --permanent --ipset=dynamiclist --flush
+for ip in $(firewall-cmd --ipset=dynamiclist --get-entries); do firewall-cmd --ipset=dynamiclist --remove-entry=$ip; done
+
+firewall-cmd --ipset=dynamiclist --get-entries | xargs -I {} firewall-cmd --ipset=dynamiclist --remove-entry={}
 
 ipset create dynamiclist hash:ip
 
