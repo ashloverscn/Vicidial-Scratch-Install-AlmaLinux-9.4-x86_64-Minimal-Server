@@ -40,10 +40,17 @@ if (chkgetpost('submit')) {
 		
 		# Insert the IP address into the local IPSet when authenticated
 		if ($PORTAL_submitlocal == 1) {
-			debugoutput("  Adding $remoteip to dynamiclist IPSET",2);
-			# Must setuid on /usr/sbin/ipset for this to work
-			$SHELL_cmd='/usr/sbin/ipset add dynamiclist ' . $remoteip . ' 2>&1';
-			shell_exec($SHELL_cmd);
+			debugoutput("  Adding $remoteip to dynamiclist IPSET and Authedzone", 2);
+			
+			$safe_ip = escapeshellarg($remoteip);
+
+			// 1. Add via firewalld command so it registers cleanly with the runtime rules
+			$cmd_fw = "/usr/bin/firewall-cmd --ipset=dynamiclist --add-entry={$safe_ip} 2>&1";
+			shell_exec($cmd_fw);
+
+			// 2. Direct kernel fallback using ipset to guarantee instant activation
+			$cmd_ipset = "/usr/sbin/ipset add dynamiclist {$safe_ip} 2>&1";
+			shell_exec($cmd_ipset);
 		}
 		
 		} else {
