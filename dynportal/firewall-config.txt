@@ -46,6 +46,8 @@ firewall-cmd --permanent --zone=authedzone --add-service=https
 
 # Apply all firewall changes cleanly
 firewall-cmd --reload
+# Restart httpd server
+systemctl restart httpd
 
 echo "=============================================================================="
 echo "[*] Firewall Configuration Reset and Applied Successfully!"
