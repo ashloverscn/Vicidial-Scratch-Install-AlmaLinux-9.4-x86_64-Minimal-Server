@@ -16,7 +16,7 @@ firewall-cmd --permanent --new-zone=authedzone
 firewall-cmd --permanent --zone=authedzone --set-target=ACCEPT
 firewall-cmd --permanent --zone=authedzone --add-source=ipset:dynamiclist
 
-echo "[*] Step 4: Configuring Public Zone..."
+echo "[*] Step 4: Configuring Public Zone (Keeping SSH & Portal Port 446 Open)..."
 firewall-cmd --permanent --zone=public --add-service=ssh
 firewall-cmd --permanent --zone=public --add-port=446/tcp
 firewall-cmd --permanent --zone=public --remove-service=http 2>/dev/null || true
@@ -26,8 +26,9 @@ echo "[*] Step 5: Moving HTTP/HTTPS services into the Authenticated Zone..."
 firewall-cmd --permanent --zone=authedzone --add-service=http
 firewall-cmd --permanent --zone=authedzone --add-service=https
 
+echo "[*] Step 6: Applying changes..."
 firewall-cmd --reload
-/usr/bin/systemctl restart httpd
+systemctl restart httpd
 
 echo "[-] Firewall configuration applied successfully!"
 ################################################################################
