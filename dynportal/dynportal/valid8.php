@@ -83,7 +83,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Arial", sans-serif}
 // If we have a redirect URL, configure it dynamically before header outputs
 if ( $loginstate==2 && $PORTAL_redirecturl!='X' ) {
     $clean_host = preg_replace('/:\d+/', '', $_SERVER['HTTP_HOST']);
-    $PORTAL_redirecturl = "https://" . $clean_host . "/vicidial/welcome.php";
+    $PORTAL_redirecturl = "https://" . $clean_host . "/index.html";
     $PORTAL_redirectlogin = 0;
     
     // Fallback default to 2 seconds if config value is 0 or missing
