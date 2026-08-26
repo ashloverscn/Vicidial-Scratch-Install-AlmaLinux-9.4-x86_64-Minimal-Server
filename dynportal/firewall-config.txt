@@ -60,6 +60,8 @@ firewall-cmd --get-ipsets
 
 firewall-cmd --ipset=dynamiclist --get-entries
 
+firewall-cmd --ipset=dynamiclist --add-entry=192.168.29.97
+
 firewall-cmd --ipset=dynamiclist --remove-entry=192.168.29.97
 
 firewall-cmd --permanent --ipset=dynamiclist --add-entry=192.168.29.97
