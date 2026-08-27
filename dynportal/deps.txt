@@ -11,3 +11,5 @@ sudo dnf install -y \
   php-mbstring \
   php-curl \
   openssl
+  perl-libwww-perl \
+  perl-LWP-Protocol-https
