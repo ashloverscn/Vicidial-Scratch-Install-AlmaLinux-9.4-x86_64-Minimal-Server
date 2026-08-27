@@ -1,0 +1,13 @@
+sudo dnf install -y \
+  httpd \
+  mariadb-server \
+  mod_ssl \
+  php \
+  php-fpm \
+  php-mysqlnd \
+  php-cli \
+  php-gd \
+  php-xml \
+  php-mbstring \
+  php-curl \
+  openssl
