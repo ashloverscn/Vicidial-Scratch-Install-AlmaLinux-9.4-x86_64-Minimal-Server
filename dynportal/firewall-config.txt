@@ -18,6 +18,7 @@ firewall-cmd --permanent --zone=authedzone --add-source=ipset:dynamiclist
 
 echo "[*] Step 4: Configuring Public Zone (Keeping SSH & Portal Port 446 Open)..."
 firewall-cmd --permanent --zone=public --add-service=ssh
+firewall-cmd --permanent --zone=public --add-port=81/tcp
 firewall-cmd --permanent --zone=public --add-port=446/tcp
 firewall-cmd --permanent --zone=public --remove-service=http 2>/dev/null || true
 firewall-cmd --permanent --zone=public --remove-service=https 2>/dev/null || true
