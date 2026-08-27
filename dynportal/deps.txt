@@ -10,6 +10,7 @@ sudo dnf install -y \
   php-xml \
   php-mbstring \
   php-curl \
-  openssl
+  openssl \
+  perl-DBD-mysql \
   perl-libwww-perl \
   perl-LWP-Protocol-https
