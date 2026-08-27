@@ -1,16 +1,19 @@
-sudo dnf install -y \
-  httpd \
-  mariadb-server \
-  mod_ssl \
-  php \
-  php-fpm \
-  php-mysqlnd \
-  php-cli \
-  php-gd \
-  php-xml \
-  php-mbstring \
-  php-curl \
-  openssl \
-  perl-DBD-mysql \
-  perl-libwww-perl \
-  perl-LWP-Protocol-https
+dnf install -y epel-release
+dnf install -y \
+    firewalld \
+    ipset \
+    httpd \
+    mariadb-server \
+    mod_ssl \
+    php \
+    php-cli \
+    php-fpm \
+    php-mysqlnd \
+    php-gd \
+    php-mbstring \
+    php-xml \
+    perl-DBD-mysql \
+    perl-libwww-perl \
+    perl-LWP-Protocol-https \
+    openssl \
+    policycoreutils-python-utils
