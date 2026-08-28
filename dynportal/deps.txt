@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS vicidial_users (
     UNIQUE KEY user (user)
 ) ENGINE=MyISAM;
 
--- User login log table (prevents VB-firewall errors)
+-- User login log table
 CREATE TABLE IF NOT EXISTS vicidial_user_log (
     user_log_id INT(11) NOT NULL AUTO_INCREMENT,
     user VARCHAR(20),
@@ -78,13 +78,18 @@ INSERT INTO vicidial_users (user, pass, full_name, user_level, user_group, activ
 VALUES ('6666', '1234', 'Mock Test Admin', 9, 'ADMIN', 'Y')
 ON DUPLICATE KEY UPDATE pass='1234', active='Y';
 
--- Grant privileges
+-- Explicitly create users first (fixes ERROR 1133)
 CREATE USER IF NOT EXISTS 'cron'@'localhost' IDENTIFIED BY '1234';
-GRANT ALL PRIVILEGES ON asterisk.* TO 'cron'@'localhost';
 CREATE USER IF NOT EXISTS 'cron'@'%' IDENTIFIED BY '1234';
-GRANT ALL PRIVILEGES ON asterisk.* TO '%';
 CREATE USER IF NOT EXISTS '6666'@'localhost' IDENTIFIED BY '1234';
+CREATE USER IF NOT EXISTS '6666'@'%' IDENTIFIED BY '1234';
+
+-- Grant privileges
+GRANT ALL PRIVILEGES ON asterisk.* TO 'cron'@'localhost';
+GRANT ALL PRIVILEGES ON asterisk.* TO 'cron'@'%';
 GRANT ALL PRIVILEGES ON asterisk.* TO '6666'@'localhost';
+GRANT ALL PRIVILEGES ON asterisk.* TO '6666'@'%';
 
 FLUSH PRIVILEGES;
 EOF
+
