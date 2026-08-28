@@ -17,3 +17,7 @@ dnf install -y \
     perl-LWP-Protocol-https \
     openssl \
     policycoreutils-python-utils
+
+sudo systemctl enable --now php-fpm
+sudo systemctl enable --now mariadb
+sudo systemctl enable --now httpd
